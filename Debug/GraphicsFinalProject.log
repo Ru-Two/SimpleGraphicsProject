@@ -1,0 +1,14 @@
+﻿  GraphicsProject.cpp
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glewInit@0 referenced in function _main
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glfwInit referenced in function _main
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glfwTerminate referenced in function _main
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glfwWindowHint referenced in function _main
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glfwCreateWindow referenced in function _main
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glfwWindowShouldClose referenced in function _main
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glfwPollEvents referenced in function _main
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glfwMakeContextCurrent referenced in function _main
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glfwSwapBuffers referenced in function _main
+GraphicsProject.obj : error LNK2019: unresolved external symbol _glfwSwapInterval referenced in function _main
+C:\Users\Rutu\OneDrive\Documents\School stuff\University\Winter 2021\Computer Graphics\FinalProject\GraphicsFinalProject\GraphicsFinalProject\dependancies\lib64\glew32s.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Rutu\OneDrive\Documents\School stuff\University\Winter 2021\Computer Graphics\FinalProject\GraphicsFinalProject\GraphicsFinalProject\dependancies\lib64\glfw3.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Rutu\OneDrive\Documents\School stuff\University\Winter 2021\Computer Graphics\FinalProject\GraphicsFinalProject\GraphicsFinalProject\Debug\GraphicsFinalProject.exe : fatal error LNK1120: 10 unresolved externals

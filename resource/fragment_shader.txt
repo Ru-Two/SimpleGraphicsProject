@@ -1,0 +1,69 @@
+#version 330 core
+vec3 calculateLight(vec3 light_position);
+
+in vec3 fs_position;
+in vec3 fs_normal;
+
+layout(location = 0) out vec4 outColor;
+
+uniform vec3 u_light_position_1;
+uniform vec3 u_light_position_2;
+uniform vec3 u_light_position_3;
+
+uniform vec3 u_eye_position;
+
+uniform float u_ambient;
+uniform float u_diffuse;
+uniform float u_specular;
+uniform int u_shininess;
+
+uniform vec4 u_col;
+
+uniform vec3 u_attenuation_values;
+
+void main(){
+	//Ambient
+	
+	vec3 ambient = vec3(1.0, 1.0, 1.0) * u_ambient;
+	
+	vec3 light1_color = calculateLight(u_light_position_1);
+	vec3 light2_color = calculateLight(u_light_position_2);
+	vec3 light3_color = calculateLight(u_light_position_3);
+	
+	vec3 final_color = (ambient + light1_color + light2_color + light3_color) * vec3(u_col.x, u_col.y, u_col.z);
+	outColor = vec4(final_color, 1.0);
+	
+}
+
+vec3 calculateLight(vec3 light_position){
+	
+	vec3 white = vec3(1.0, 1.0, 1.0);
+	
+	//Diffuse
+
+	vec3 pos_to_light = normalize(light_position - fs_position);
+	vec3 diffuse_color = white * u_diffuse;
+	float diffuse_scale = clamp(dot(pos_to_light, fs_normal), 0, 1);
+	
+	vec3 diffuse = diffuse_color * diffuse_scale;
+	
+	//Specular
+
+	vec3 pos_to_eye = normalize(u_eye_position - fs_position);
+	vec3 reflection = reflect(-pos_to_light, fs_normal);
+	float specular_scale = pow(max(dot(pos_to_eye, reflection), 0.0), u_shininess);
+	
+	vec3 specular = u_specular * specular_scale * white;
+
+	//Attenuation
+	
+	
+	float distance = length(light_position - fs_position);
+	float attenuation = 1.0f / (u_attenuation_values.x + u_attenuation_values.y*distance + u_attenuation_values.z * (distance * distance));
+	
+	diffuse  *= attenuation;
+	specular *= attenuation;
+
+	//output
+	return (diffuse + specular);
+}
